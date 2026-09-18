@@ -1,203 +1,334 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ride Hub — Bike Rental Portal</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- ===== LOADING SCREEN ===== -->
-  <div id="loadingScreen" class="loading-screen">
-    <div class="loading-card">
-      <div class="logo-dot">RH</div>
-      <h2>Ride Hub</h2>
-      <p>Bike Rental Portal</p>
-      <div class="progress-track">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p class="loading-text">Loading...</p>
-    </div>
-  </div>
-
-  <!-- ===== HEADER / NAVIGATION ===== -->
-  <header class="site-header">
-    <div class="nav-wrap">
-      <a href="#home" class="brand">
-        <span class="logo-dot small">RH</span>
-        <span class="brand-name">Ride Hub</span>
-      </a>
-
-      <nav>
-        <ul class="nav-links" id="navMenu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="nav-login"><a href="#login-modal" class="btn btn-dark btn-small">Login</a></li>
-        </ul>
-      </nav>
-
-      <button class="hamburger" id="menuBtn" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ===== HERO SECTION ===== -->
-  <section id="home" class="hero">
-    <div class="hero-wrap">
-      <div class="hero-text">
-        <h1>Ride Anywhere.<br><span class="accent">Anytime.</span></h1>
-        <p>Book a bike near you in seconds and ride across campus or the city hassle-free — no queues, no paperwork.</p>
-        <div class="hero-buttons">
-          <button class="btn btn-dark" id="bookBtn">Book a Bike</button>
-          <a href="#about" class="btn btn-outline">Learn More</a>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ride Hub — Bike Rental Portal</title>
+<link href="style.css" rel="stylesheet"/>
+<script>
+    (function () {
+      if (localStorage.getItem("rideHubTheme") === "dark") {
+        document.documentElement.classList.add("theme-preload-dark");
+      }
+    })();
+  </script>
+<style>
+/* ---------- Single HTML file: separate page routes ---------- */
+.route-page { display: none; }
+.route-page.active-page { display: block; }
+</style></head>
+<body data-page="home">
+<!-- ================= LOADING SCREEN ================= -->
+<div class="loading-screen" id="loadingScreen">
+<div class="loading-card">
+<img alt="Ride Hub bike rental logo" class="loading-logo" src="ride-hub-logo.png"/>
+<div class="progress-track"><div class="progress-bar"></div></div>
+<p class="loading-text">Loading...</p>
+</div>
+</div>
+<!-- ================= HEADER / NAVIGATION ================= -->
+<header class="site-header">
+<div class="nav-wrap">
+<a class="brand" href="?page=home">
+<img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
+</a>
+<nav>
+<ul class="nav-links" id="navMenu">
+<li><a data-page="home" href="?page=home">Home</a></li>
+<li><a data-page="about" href="?page=about">About</a></li>
+<li><a data-page="how" href="?page=how">How It Works</a></li>
+<li><a data-page="contact" href="?page=contact">Contact</a></li>
+<li class="theme-item">
+<button aria-label="Switch to dark mode" class="theme-toggle" id="themeToggle" type="button">
+<span class="theme-icon" id="themeIcon">☾</span>
+<span id="themeText">Dark Mode</span>
+</button>
+</li>
+<li class="nav-login">
+<a class="btn btn-dark btn-small" href="#login-modal">Login</a>
+</li>
+</ul>
+</nav>
+<button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
+<span></span><span></span><span></span>
+</button>
+</div>
+</header>
+<!-- ================= HERO / HOME ================= -->
+<main><section class="hero route-page route-home" data-route="home" id="home">
+<div class="hero-wrap">
+<div class="hero-text">
+<p class="eyebrow">BIKE RENTAL PORTAL</p>
+<h1>Ride Anywhere.<br/><span class="accent">Anytime.</span></h1>
+<p>Book a bike near you in seconds and ride across campus or the city hassle-free — no queues, no paperwork.</p>
+<div class="hero-buttons">
+<a class="btn btn-dark" href="#booking-modal">Book a Bike</a>
+<a class="btn btn-outline" href="?page=about">Learn More</a>
+</div>
+<p class="booking-msg">Choose a station, reserve a bike and pick it up when you arrive.</p>
+</div>
+<div class="hero-card">
+<div class="hero-card-top">
+<div><p class="hero-card-label">NEARBY STATION</p><h3>MG Road Hub</h3></div>
+<span class="station-status">OPEN</span>
+</div>
+<p class="location-line">● MG Road · Main Gate</p>
+<div class="bike-count"><strong>12</strong><span>bikes available</span></div>
+<div class="track"><div class="track-fill"></div></div>
+<p class="hero-card-sub">Pick up here after booking</p>
+<p class="hero-card-rating">★★★★☆  4.3 / 5</p>
+<a class="station-link" href="#booking-modal">View stations →</a>
+</div>
+</div>
+<div class="stats-strip">
+<div class="stat"><span class="stat-number">1,000+</span><span class="stat-label">Bikes</span></div>
+<div class="stat"><span class="stat-number">25+</span><span class="stat-label">Stations</span></div>
+<div class="stat"><span class="stat-number">5,000+</span><span class="stat-label">Rides</span></div>
+<div class="stat"><span class="stat-number">98%</span><span class="stat-label">Uptime</span></div>
+</div>
+</section><section class="page-section about-page route-page" data-route="about">
+<p class="eyebrow">WHY RIDE HUB</p>
+<h1>Introduction &amp; Idea <span class="accent">Overview</span></h1>
+<div class="about-layout">
+<div>
+<p class="section-lead">Ride Hub is a simple Bike Rental Portal that gives riders an easy, on-demand way to book and return bikes across campus and the city.</p>
+<div class="info-block">
+<p class="eyebrow">THE PROBLEM</p>
+<ul class="plain-list">
+<li>Traditional bike rentals mean queues, paperwork &amp; delays</li>
+<li>Riders need a fast, reliable way to find and book bikes</li>
+<li>No single platform to track bikes, stations &amp; ride history</li>
+</ul>
+</div>
+<div class="info-block">
+<p class="eyebrow">OUR IDEA</p>
+<ul class="plain-list">
+<li>A centralized, digital bike rental platform</li>
+<li>Simple, rider-friendly booking &amp; return flow</li>
+<li>Real-time visibility into bike &amp; station availability</li>
+<li>Promotes affordable, eco-friendly commuting</li>
+</ul>
+</div>
+</div>
+<div class="about-stats-card">
+<div class="mini-stat"><strong>1,000+</strong><span>Riders</span></div>
+<div class="mini-stat"><strong>25+</strong><span>Stations</span></div>
+<div class="mini-stat"><strong>5,000+</strong><span>Rides</span></div>
+<div class="mini-stat"><strong>95%</strong><span>Response Rate</span></div>
+<p>Live rider engagement stats</p>
+</div>
+</div>
+<section class="features about-features">
+<p class="eyebrow">THE ACTUAL INTERFACE</p>
+<h2>Every ride helps us <span class="accent">move.</span></h2>
+<p class="section-sub">Ride Hub gives riders and station operators a clear view of bikes, stations and bookings.</p>
+<div class="feature-grid">
+<div class="feature-card"><div class="feature-icon">01</div><h3>Quick Booking</h3><p>Reserve a bike in seconds from any nearby station.</p></div>
+<div class="feature-card"><div class="feature-icon">02</div><h3>Live Tracking</h3><p>See station locations and the number of bikes available.</p></div>
+<div class="feature-card"><div class="feature-icon">03</div><h3>Easy Returns</h3><p>Return your bike to an available Ride Hub station.</p></div>
+</div>
+</section>
+</section><section class="page-section how-page route-page" data-route="how">
+<p class="eyebrow">SIMPLE, FOCUSED UI</p>
+<h1>How It <span class="accent">Works</span></h1>
+<p class="section-sub">Three simple steps between you and your next ride.</p>
+<div class="steps-grid">
+<div class="step-card"><span class="step-number">01</span><h3>Login</h3><p>Enter Ride Hub and choose your ride.</p></div>
+<div class="step-card"><span class="step-number">02</span><h3>Book a Bike</h3><p>Pick a station, bike and ride window.</p></div>
+<div class="step-card"><span class="step-number">03</span><h3>Start Riding</h3><p>Go to the station, pick up your reserved bike and ride.</p></div>
+</div>
+<div class="flow"><div class="flow-box green">Rider</div><span>→</span><div class="flow-box orange">Book a Bike</div><span>→</span><div class="flow-box green">Pick Up</div><span>→</span><div class="flow-box orange">Return</div></div>
+<div class="station-explainer">
+<p class="eyebrow">STATION MODEL</p>
+<h2>Book first. <span class="accent">Pick up there.</span></h2>
+<p>Ride Hub uses fixed bike stations. Select a pickup station, choose your bike and ride window, then visit that station to collect your reserved bike. Return it to an available Ride Hub station.</p>
+</div>
+<div class="how-cta"><a class="btn btn-dark" href="#booking-modal">Book a Bike</a></div>
+</section><section class="page-section contact-page route-page" data-route="contact">
+<div class="contact-wrap">
+<div class="contact-text">
+<p class="eyebrow">GET IN TOUCH</p>
+<h1>Questions about your <span class="accent">ride?</span></h1>
+<p class="section-sub">Ask about stations, bookings or future Ride Hub partnerships.</p>
+<div class="contact-details">
+<p><strong>Email</strong><br/>support@ridehub.example</p>
+<p><strong>Service</strong><br/>Campus &amp; city bike stations</p>
+</div>
+</div>
+<form action="#" class="contact-form" id="contactForm" method="post">
+<label for="name">Name</label><input id="name" name="name" placeholder="Your full name" required="" type="text"/>
+<label for="email">Email</label><input id="email" name="email" placeholder="you@rider.com" required="" type="email"/>
+<label for="message">Message</label><textarea id="message" name="message" placeholder="How can we help?" required="" rows="4"></textarea>
+<button class="btn btn-dark" type="submit">Send Message</button>
+<p class="form-msg" id="formMsg"></p>
+</form>
+</div>
+</section></main>
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+<div class="footer-wrap">
+<img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
+<p class="tagline">"Rent. Ride. Repeat."</p>
+<p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+</div>
+</footer>
+<!-- ================= LOGIN MODAL ================= -->
+<div class="login-modal" id="login-modal">
+<div class="modal-box">
+<a aria-label="Close login" class="modal-close" href="#">×</a>
+<img alt="Ride Hub" class="modal-logo" src="ride-hub-logo.png"/>
+<h2>Welcome Back</h2>
+<p class="modal-sub">Login to book your ride</p>
+<form action="#" class="login-form" id="loginForm" method="post">
+<label for="loginEmail">Email Address</label>
+<input id="loginEmail" name="loginEmail" placeholder="you@rider.com" required="" type="email"/>
+<label for="loginPassword">Password</label>
+<input id="loginPassword" maxlength="30" name="loginPassword" placeholder="Enter your password" required="" type="password"/>
+<div class="modal-row">
+<label class="remember"><input name="remember" type="checkbox"/> Remember me</label>
+<a href="mailto:support@ridehub.example?subject=Ride%20Hub%20Password%20Help">Forgot password?</a>
+</div>
+<button class="btn btn-dark btn-full" type="submit">Login</button>
+<p class="modal-msg" id="loginMsg"></p>
+</form>
+<p class="modal-footer">Don't have an account? <a href="#booking-modal">Start as a guest</a></p>
+</div>
+</div>
+<!-- ================= BOOKING MODAL ================= -->
+<div class="booking-modal" id="booking-modal">
+<div class="booking-box">
+<a aria-label="Close booking" class="modal-close" href="#">×</a>
+<div class="booking-heading">
+<div>
+<p class="eyebrow">RIDE HUB BOOKING</p>
+<h2>Reserve your ride</h2>
+<p class="modal-sub">
+            Choose where you will pick up the bike and when you want to ride.
+          </p>
+</div>
+</div>
+<!--
+        This is intentionally a normal HTML form.
+        It demonstrates the form/input/select/radio/date/time concepts
+        from the lecture notes without adding a backend yet.
+      -->
+<form action="#" class="booking-form" id="bookingForm" method="post">
+<div class="form-section-title">1. Choose your station</div>
+<div class="form-row-two">
+<div class="field">
+<label for="pickupStation">Pickup Station</label>
+<select id="pickupStation" name="pickupStation" required="">
+<option value="">Select a station</option>
+<option value="MG Road Hub">MG Road Hub — 12 bikes</option>
+<option value="University Gate">University Gate — 15 bikes</option>
+<option value="City Centre">City Centre — 8 bikes</option>
+<option value="Railway Station">Railway Station — 6 bikes</option>
+<option value="Green Park">Green Park — 10 bikes</option>
+</select>
+</div>
+<div class="field">
+<label for="returnStation">Return Station</label>
+<select id="returnStation" name="returnStation" required="">
+<option value="">Select a return station</option>
+<option value="MG Road Hub">MG Road Hub</option>
+<option value="University Gate">University Gate</option>
+<option value="City Centre">City Centre</option>
+<option value="Railway Station">Railway Station</option>
+<option value="Green Park">Green Park</option>
+</select>
+</div>
+</div>
+<div class="location-note">
+<strong>📍 Station model:</strong>
+          Ride Hub uses fixed bike stations. You book first, then visit the
+          selected station to pick up your reserved bike.
         </div>
-        <p class="booking-msg" id="bookingMsg"></p>
+<div class="form-section-title">2. Choose your bike</div>
+<div class="bike-options">
+<label class="bike-option">
+<input checked="" name="bikeType" type="radio" value="City Bike"/>
+<span>
+<strong>City Bike</strong>
+<small>₹40 / hour · Everyday rides</small>
+</span>
+</label>
+<label class="bike-option">
+<input name="bikeType" type="radio" value="Mountain Bike"/>
+<span>
+<strong>Mountain Bike</strong>
+<small>₹60 / hour · Rougher routes</small>
+</span>
+</label>
+<label class="bike-option">
+<input name="bikeType" type="radio" value="Electric Bike"/>
+<span>
+<strong>Electric Bike</strong>
+<small>₹90 / hour · Extra assistance</small>
+</span>
+</label>
+</div>
+<div class="form-section-title">3. Pick your ride window</div>
+<div class="form-row-two">
+<div class="field">
+<label for="rideDate">Date</label>
+<input id="rideDate" name="rideDate" required="" type="date"/>
+</div>
+<div class="field">
+<label for="rideTime">Pickup Time</label>
+<input id="rideTime" max="22:00" min="06:00" name="rideTime" required="" type="time"/>
+</div>
+</div>
+<div class="form-row-two">
+<div class="field">
+<label for="rideDuration">Duration</label>
+<select id="rideDuration" name="rideDuration" required="">
+<option value="1">1 hour</option>
+<option value="2">2 hours</option>
+<option value="3">3 hours</option>
+<option value="4">4 hours</option>
+<option value="6">6 hours</option>
+<option value="8">8 hours</option>
+</select>
+</div>
+<div class="field">
+<label for="riderName">Rider Name</label>
+<input id="riderName" maxlength="40" name="riderName" placeholder="Your name" required="" type="text"/>
+</div>
+</div>
+<div class="form-section-title">4. Payment method</div>
+<div class="payment-options">
+<label class="payment-option">
+<input checked="" name="payment" type="radio" value="UPI"/>
+<span><strong>UPI</strong><small>Pay using UPI</small></span>
+</label>
+<label class="payment-option">
+<input name="payment" type="radio" value="Card"/>
+<span><strong>Card</strong><small>Debit / Credit card</small></span>
+</label>
+<label class="payment-option">
+<input name="payment" type="radio" value="Pay at Station"/>
+<span><strong>At Station</strong><small>Pay when you pick up</small></span>
+</label>
+</div>
+<div class="booking-bottom">
+<div class="price-box">
+<span>Estimated total</span>
+<strong id="estimatedTotal">₹40</strong>
+<small id="priceNote">1 hour · City Bike</small>
+</div>
+<button class="btn btn-dark" type="submit">Confirm Booking</button>
+</div>
+<p class="booking-form-msg" id="bookingFormMsg"></p>
+</form>
+<div class="booking-demo-note">
+<strong>Prototype note:</strong>
+        payment is only a selectable method for now. No real money is charged.
+        A future JavaScript/backend version can connect UPI, cards and actual
+        booking records.
       </div>
-
-      <div class="hero-card">
-        <p class="hero-card-label">Live Station Preview</p>
-        <h3>MG Road Hub</h3>
-        <div class="track">
-          <div class="track-fill"></div>
-        </div>
-        <p class="hero-card-sub">12 bikes available</p>
-        <p class="hero-card-rating">★★★★☆ &nbsp;4.3 / 5</p>
-      </div>
-    </div>
-
-    <div class="stats-strip">
-      <div class="stat"><span class="stat-number">1,000+</span><span class="stat-label">Bikes</span></div>
-      <div class="stat"><span class="stat-number">25+</span><span class="stat-label">Stations</span></div>
-      <div class="stat"><span class="stat-number">5,000+</span><span class="stat-label">Rides</span></div>
-      <div class="stat"><span class="stat-number">98%</span><span class="stat-label">Uptime</span></div>
-    </div>
-  </section>
-
-  <!-- ===== KEY FEATURES ===== -->
-  <section id="about" class="features">
-    <h2>Every ride helps us move.</h2>
-    <p class="section-sub">Ride Hub gives riders and station operators a clear, real-time view of bikes and bookings.</p>
-
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Quick Booking</h3>
-        <p>Reserve a bike in seconds from any nearby station.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 12 3a7 7 0 0 1 7 6.5C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-        </div>
-        <h3>Live Tracking</h3>
-        <p>See real-time bike and station availability on the map.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 12.5l5 5L20 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Easy Returns</h3>
-        <p>Drop your bike off at any nearby station, hassle-free.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section id="how-it-works" class="how-it-works">
-    <h2>How it works</h2>
-    <p class="section-sub">Three simple steps between you and your next ride.</p>
-
-    <div class="steps-grid">
-      <div class="step-card">
-        <span class="step-number">01</span>
-        <h3>Login</h3>
-        <p>Sign in to Ride Hub with your student or rider account.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-number">02</span>
-        <h3>Book a Bike</h3>
-        <p>Pick a nearby station and confirm your booking.</p>
-      </div>
-      <div class="step-card">
-        <span class="step-number">03</span>
-        <h3>Start Riding</h3>
-        <p>Unlock your bike at the station and enjoy the ride.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="contact">
-    <div class="contact-wrap">
-      <div class="contact-text">
-        <h2>Get in touch</h2>
-        <p class="section-sub">Questions about stations, bookings, or partnerships? Send us a message.</p>
-      </div>
-
-      <form id="contactForm" class="contact-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your full name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@rider.com" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
-
-        <button type="submit" class="btn btn-dark">Send Message</button>
-        <p class="form-msg" id="formMsg"></p>
-      </form>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="footer-wrap">
-      <div class="footer-brand">
-        <span class="logo-dot small">RH</span>
-        <span class="brand-name">Ride Hub</span>
-      </div>
-      <p class="tagline">"Rent. Ride. Repeat."</p>
-      <p class="footer-meta">G12-PID-23 &nbsp;•&nbsp; Team Triple Joint &nbsp;•&nbsp; Bike Rental System</p>
-    </div>
-  </footer>
-
-  <!-- ===== LOGIN MODAL (CSS-only, opened via :target) ===== -->
-  <div id="login-modal" class="login-modal">
-    <div class="modal-box">
-      <a href="#" class="modal-close" aria-label="Close login">&times;</a>
-      <div class="logo-dot">RH</div>
-      <h2>Welcome Back</h2>
-      <p class="modal-sub">Login to book your ride</p>
-
-      <form id="loginForm" class="login-form">
-        <label for="loginEmail">Email Address</label>
-        <input type="email" id="loginEmail" placeholder="you@rider.com" required>
-
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password" required>
-
-        <div class="modal-row">
-          <label class="remember"><input type="checkbox"> Remember me</label>
-          <a href="#" class="forgot">Forgot password?</a>
-        </div>
-
-        <button type="submit" class="btn btn-dark btn-full">Login</button>
-      </form>
-
-      <p class="modal-footer">Don't have an account? <a href="#">Sign up</a></p>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+</div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
