@@ -1,71 +1,207 @@
 /* =========================================================
-   RIDE HUB — SCRIPT.JS
-   Handles: loading screen, hamburger menu, book-a-bike
-   button interaction, and contact form feedback.
-   (Login modal itself needs no JS — it's pure CSS :target.)
+   RIDE HUB — BASIC JAVASCRIPT
+   Kept intentionally small for the first evaluation.
+
+   JavaScript currently handles only:
+   1. loading screen
+   2. mobile navigation
+   3. separate page-style navigation inside ONE HTML file
+   4. basic booking price calculation
+   5. simple form feedback
+   6. light / dark mode switch
+
+   No backend, database, API or real payment processing yet.
    ========================================================= */
 
-// ---------- 1. Loading screen ----------
-// Wait for everything to load, then let the progress bar
-// finish its animation before fading the screen out.
 window.addEventListener("load", function () {
   var loadingScreen = document.getElementById("loadingScreen");
 
-  setTimeout(function () {
-    loadingScreen.classList.add("hide");
-  }, 1900); // slightly longer than the 1.8s progress-bar animation
+  if (loadingScreen) {
+    setTimeout(function () {
+      loadingScreen.style.opacity = "0";
+      loadingScreen.style.visibility = "hidden";
+    }, 1800);
+  }
 });
 
-// ---------- 2. Responsive hamburger menu ----------
-var menuBtn = document.getElementById("menuBtn");
-var navMenu = document.getElementById("navMenu");
-
-menuBtn.onclick = function () {
-  navMenu.classList.toggle("open");
-  menuBtn.classList.toggle("active");
+/* ---------- Single HTML file: separate page routes ---------- */
+var routeTitles = {
+  home: "Ride Hub — Bike Rental Portal",
+  about: "About — Ride Hub",
+  how: "How It Works — Ride Hub",
+  contact: "Contact — Ride Hub"
 };
 
-// Close the mobile menu automatically after a link is tapped
-var navLinks = navMenu.querySelectorAll("a");
-navLinks.forEach(function (link) {
-  link.addEventListener("click", function () {
+function getRoute() {
+  var params = new URLSearchParams(window.location.search);
+  var route = params.get("page");
+  return routeTitles[route] ? route : "home";
+}
+
+function showRoute(route, updateHistory) {
+  if (!routeTitles[route]) {
+    route = "home";
+  }
+
+  document.querySelectorAll(".route-page").forEach(function (page) {
+    page.classList.toggle("active-page", page.getAttribute("data-route") === route);
+  });
+
+  document.body.setAttribute("data-page", route);
+  document.title = routeTitles[route];
+
+  document.querySelectorAll(".nav-links a[data-page]").forEach(function (link) {
+    link.classList.toggle("active", link.getAttribute("data-page") === route);
+  });
+
+  if (updateHistory) {
+    history.pushState({}, "", "?page=" + route);
+  }
+
+  var navMenu = document.getElementById("navMenu");
+  if (navMenu) {
     navMenu.classList.remove("open");
-    menuBtn.classList.remove("active");
+  }
+
+  window.scrollTo(0, 0);
+}
+
+showRoute(getRoute(), false);
+
+window.addEventListener("popstate", function () {
+  showRoute(getRoute(), false);
+});
+
+document.querySelectorAll('a[href^="?page="]').forEach(function (link) {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    var params = new URLSearchParams(link.getAttribute("href").replace(/^\?/, ""));
+    showRoute(params.get("page"), true);
   });
 });
 
-// ---------- 3. "Book a Bike" button interaction ----------
-var bookBtn = document.getElementById("bookBtn");
-var bookingMsg = document.getElementById("bookingMsg");
+/* ---------- Mobile navigation ---------- */
+var menuBtn = document.getElementById("menuBtn");
+var navMenu = document.getElementById("navMenu");
 
-bookBtn.onclick = function () {
-  bookingMsg.textContent = "🚲 Nearest bike reserved at MG Road Hub — head over within 15 minutes!";
+if (menuBtn && navMenu) {
+  menuBtn.addEventListener("click", function () {
+    navMenu.classList.toggle("open");
+  });
+}
 
-  // Clear the message after a few seconds so it doesn't linger forever
-  setTimeout(function () {
-    bookingMsg.textContent = "";
-  }, 5000);
+/* ---------- Light / dark mode ---------- */
+var themeToggle = document.getElementById("themeToggle");
+var themeText = document.getElementById("themeText");
+var themeIcon = document.getElementById("themeIcon");
+
+function applyTheme(isDark) {
+  document.body.classList.toggle("dark-mode", isDark);
+
+  if (themeText) {
+    themeText.textContent = isDark ? "Light Mode" : "Dark Mode";
+  }
+
+  if (themeIcon) {
+    themeIcon.textContent = isDark ? "☀" : "☾";
+  }
+
+  if (themeToggle) {
+    themeToggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+}
+
+var savedTheme = localStorage.getItem("rideHubTheme");
+applyTheme(savedTheme === "dark");
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", function () {
+    var isDark = !document.body.classList.contains("dark-mode");
+    applyTheme(isDark);
+    localStorage.setItem("rideHubTheme", isDark ? "dark" : "light");
+  });
+}
+
+/* ---------- Basic booking price calculator ---------- */
+var bookingForm = document.getElementById("bookingForm");
+var estimatedTotal = document.getElementById("estimatedTotal");
+var priceNote = document.getElementById("priceNote");
+
+var bikeRates = {
+  "City Bike": 40,
+  "Mountain Bike": 60,
+  "Electric Bike": 90
 };
 
-// ---------- 4. Contact form feedback ----------
+function updatePrice() {
+  var selectedBike = document.querySelector('input[name="bikeType"]:checked');
+  var durationElement = document.getElementById("rideDuration");
+
+  if (!selectedBike || !durationElement || !estimatedTotal || !priceNote) {
+    return;
+  }
+
+  var duration = durationElement.value;
+  var rate = bikeRates[selectedBike.value];
+  var total = rate * Number(duration);
+
+  estimatedTotal.textContent = "₹" + total;
+  priceNote.textContent = duration + (duration == 1 ? " hour · " : " hours · ") + selectedBike.value;
+}
+
+document.querySelectorAll('input[name="bikeType"]').forEach(function (bike) {
+  bike.addEventListener("change", updatePrice);
+});
+
+var durationElement = document.getElementById("rideDuration");
+if (durationElement) {
+  durationElement.addEventListener("change", updatePrice);
+}
+
+/* ---------- Basic booking form feedback ---------- */
+var bookingFormMsg = document.getElementById("bookingFormMsg");
+
+if (bookingForm) {
+  bookingForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (bookingFormMsg) {
+      bookingFormMsg.textContent = "Booking details received. This is a front-end prototype — no payment was charged.";
+      setTimeout(function () { bookingFormMsg.textContent = ""; }, 5000);
+    }
+  });
+}
+
+/* ---------- Basic contact form feedback ---------- */
 var contactForm = document.getElementById("contactForm");
 var formMsg = document.getElementById("formMsg");
 
-contactForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // stop the page from reloading (no backend yet)
+if (contactForm) {
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  formMsg.textContent = "Thanks! Your message has been sent — we'll get back to you soon.";
-  contactForm.reset();
+    if (formMsg) {
+      formMsg.textContent = "Message submitted in demo mode. A backend can be connected later.";
+      contactForm.reset();
+      setTimeout(function () { formMsg.textContent = ""; }, 4000);
+    }
+  });
+}
 
-  setTimeout(function () {
-    formMsg.textContent = "";
-  }, 5000);
-});
-
-// ---------- 5. Login form feedback (demo only, no backend) ----------
+/* ---------- Basic login feedback ---------- */
 var loginForm = document.getElementById("loginForm");
+var loginMsg = document.getElementById("loginMsg");
 
-loginForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  alert("This is a demo login — connect a backend to make it work for real.");
-});
+if (loginForm) {
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    if (loginMsg) {
+      loginMsg.textContent = "Demo login only — real authentication can be added later.";
+      setTimeout(function () { loginMsg.textContent = ""; }, 4000);
+    }
+  });
+}
