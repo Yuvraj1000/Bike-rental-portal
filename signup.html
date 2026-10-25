@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up — Ride Hub</title>
+<link href="style.css" rel="stylesheet"/>
+<script>
+  // Apply the saved dark theme BEFORE the page paints (avoids a white flash)
+  if (localStorage.getItem("rideHubTheme") === "dark") {
+    document.documentElement.classList.add("theme-preload-dark");
+  }
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="theme-item">
+          <button aria-label="Switch theme" class="theme-toggle" id="themeToggle" type="button">
+            <span class="theme-icon" id="themeIcon">☾</span>
+            <span id="themeText">Dark Mode</span>
+          </button>
+        </li>
+        <!-- auth.js fills this with Login/Sign Up or Hi, Name/Logout -->
+        <li class="nav-login" id="authArea"></li>
+      </ul>
+    </nav>
+    <button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="auth-page">
+  <div class="auth-card">
+    <p class="eyebrow">JOIN RIDE HUB</p>
+    <h1>Create your <span class="accent">account</span></h1>
+    <p class="section-sub">Sign up once and book bikes in seconds.</p>
+
+    <form class="auth-form" id="signupForm">
+      <label class="required" for="signupName">Full Name</label>
+      <input id="signupName" maxlength="40" placeholder="Your full name" required type="text"/>
+
+      <label class="required" for="signupEmail">Email Address</label>
+      <input id="signupEmail" placeholder="you@rider.com" required type="email"/>
+
+      <label class="required" for="signupPassword">Password</label>
+      <input class="password-box" id="signupPassword" minlength="6" placeholder="At least 6 characters" required type="password"/>
+
+      <label class="required" for="signupConfirm">Confirm Password</label>
+      <input class="password-box" id="signupConfirm" placeholder="Type the password again" required type="password"/>
+
+      <label class="show-password">
+        <input id="showPassword" type="checkbox"/> Show passwords
+      </label>
+
+      <button class="btn btn-dark btn-full" type="submit">Create Account</button>
+      <p class="auth-msg" id="authMsg"></p>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
+    <p class="tagline">"Rent. Ride. Repeat."</p>
+    <p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

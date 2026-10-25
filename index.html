@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -7,328 +6,605 @@
 <title>Ride Hub — Bike Rental Portal</title>
 <link href="style.css" rel="stylesheet"/>
 <script>
-    (function () {
-      if (localStorage.getItem("rideHubTheme") === "dark") {
-        document.documentElement.classList.add("theme-preload-dark");
-      }
-    })();
-  </script>
-<style>
-/* ---------- Single HTML file: separate page routes ---------- */
-.route-page { display: none; }
-.route-page.active-page { display: block; }
-</style></head>
-<body data-page="home">
-<!-- ================= LOADING SCREEN ================= -->
+  // Apply the saved dark theme BEFORE the page paints (avoids a white flash)
+  if (localStorage.getItem("rideHubTheme") === "dark") {
+    document.documentElement.classList.add("theme-preload-dark");
+  }
+</script>
+</head>
+
+<body>
+
+<!-- ================= LOADING SCREEN (plain HTML) ================= -->
 <div class="loading-screen" id="loadingScreen">
-<div class="loading-card">
-<img alt="Ride Hub bike rental logo" class="loading-logo" src="ride-hub-logo.png"/>
-<div class="progress-track"><div class="progress-bar"></div></div>
-<p class="loading-text">Loading...</p>
+  <div class="loading-card">
+    <img alt="Ride Hub bike rental logo" class="loading-logo" src="ride-hub-logo.png"/>
+    <div class="progress-track"><div class="progress-bar"></div></div>
+    <p class="loading-text">Loading...</p>
+  </div>
 </div>
-</div>
-<!-- ================= HEADER / NAVIGATION ================= -->
-<header class="site-header">
-<div class="nav-wrap">
-<a class="brand" href="?page=home">
-<img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
-</a>
-<nav>
-<ul class="nav-links" id="navMenu">
-<li><a data-page="home" href="?page=home">Home</a></li>
-<li><a data-page="about" href="?page=about">About</a></li>
-<li><a data-page="how" href="?page=how">How It Works</a></li>
-<li><a data-page="contact" href="?page=contact">Contact</a></li>
-<li class="theme-item">
-<button aria-label="Switch to dark mode" class="theme-toggle" id="themeToggle" type="button">
-<span class="theme-icon" id="themeIcon">☾</span>
-<span id="themeText">Dark Mode</span>
-</button>
-</li>
-<li class="nav-login">
-<a class="btn btn-dark btn-small" href="#login-modal">Login</a>
-</li>
-</ul>
-</nav>
-<button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
-<span></span><span></span><span></span>
-</button>
-</div>
-</header>
-<!-- ================= HERO / HOME ================= -->
-<main><section class="hero route-page route-home" data-route="home" id="home">
-<div class="hero-wrap">
-<div class="hero-text">
-<p class="eyebrow">BIKE RENTAL PORTAL</p>
-<h1>Ride Anywhere.<br/><span class="accent">Anytime.</span></h1>
-<p>Book a bike near you in seconds and ride across campus or the city hassle-free — no queues, no paperwork.</p>
-<div class="hero-buttons">
-<a class="btn btn-dark" href="#booking-modal">Book a Bike</a>
-<a class="btn btn-outline" href="?page=about">Learn More</a>
-</div>
-<p class="booking-msg">Choose a station, reserve a bike and pick it up when you arrive.</p>
-</div>
-<div class="hero-card">
-<div class="hero-card-top">
-<div><p class="hero-card-label">NEARBY STATION</p><h3>MG Road Hub</h3></div>
-<span class="station-status">OPEN</span>
-</div>
-<p class="location-line">● MG Road · Main Gate</p>
-<div class="bike-count"><strong>12</strong><span>bikes available</span></div>
-<div class="track"><div class="track-fill"></div></div>
-<p class="hero-card-sub">Pick up here after booking</p>
-<p class="hero-card-rating">★★★★☆  4.3 / 5</p>
-<a class="station-link" href="#booking-modal">View stations →</a>
-</div>
-</div>
-<div class="stats-strip">
-<div class="stat"><span class="stat-number">1,000+</span><span class="stat-label">Bikes</span></div>
-<div class="stat"><span class="stat-number">25+</span><span class="stat-label">Stations</span></div>
-<div class="stat"><span class="stat-number">5,000+</span><span class="stat-label">Rides</span></div>
-<div class="stat"><span class="stat-number">98%</span><span class="stat-label">Uptime</span></div>
-</div>
-</section><section class="page-section about-page route-page" data-route="about">
-<p class="eyebrow">WHY RIDE HUB</p>
-<h1>Introduction &amp; Idea <span class="accent">Overview</span></h1>
-<div class="about-layout">
-<div>
-<p class="section-lead">Ride Hub is a simple Bike Rental Portal that gives riders an easy, on-demand way to book and return bikes across campus and the city.</p>
-<div class="info-block">
-<p class="eyebrow">THE PROBLEM</p>
-<ul class="plain-list">
-<li>Traditional bike rentals mean queues, paperwork &amp; delays</li>
-<li>Riders need a fast, reliable way to find and book bikes</li>
-<li>No single platform to track bikes, stations &amp; ride history</li>
-</ul>
-</div>
-<div class="info-block">
-<p class="eyebrow">OUR IDEA</p>
-<ul class="plain-list">
-<li>A centralized, digital bike rental platform</li>
-<li>Simple, rider-friendly booking &amp; return flow</li>
-<li>Real-time visibility into bike &amp; station availability</li>
-<li>Promotes affordable, eco-friendly commuting</li>
-</ul>
-</div>
-</div>
-<div class="about-stats-card">
-<div class="mini-stat"><strong>1,000+</strong><span>Riders</span></div>
-<div class="mini-stat"><strong>25+</strong><span>Stations</span></div>
-<div class="mini-stat"><strong>5,000+</strong><span>Rides</span></div>
-<div class="mini-stat"><strong>95%</strong><span>Response Rate</span></div>
-<p>Live rider engagement stats</p>
-</div>
-</div>
-<section class="features about-features">
-<p class="eyebrow">THE ACTUAL INTERFACE</p>
-<h2>Every ride helps us <span class="accent">move.</span></h2>
-<p class="section-sub">Ride Hub gives riders and station operators a clear view of bikes, stations and bookings.</p>
-<div class="feature-grid">
-<div class="feature-card"><div class="feature-icon">01</div><h3>Quick Booking</h3><p>Reserve a bike in seconds from any nearby station.</p></div>
-<div class="feature-card"><div class="feature-icon">02</div><h3>Live Tracking</h3><p>See station locations and the number of bikes available.</p></div>
-<div class="feature-card"><div class="feature-icon">03</div><h3>Easy Returns</h3><p>Return your bike to an available Ride Hub station.</p></div>
-</div>
-</section>
-</section><section class="page-section how-page route-page" data-route="how">
-<p class="eyebrow">SIMPLE, FOCUSED UI</p>
-<h1>How It <span class="accent">Works</span></h1>
-<p class="section-sub">Three simple steps between you and your next ride.</p>
-<div class="steps-grid">
-<div class="step-card"><span class="step-number">01</span><h3>Login</h3><p>Enter Ride Hub and choose your ride.</p></div>
-<div class="step-card"><span class="step-number">02</span><h3>Book a Bike</h3><p>Pick a station, bike and ride window.</p></div>
-<div class="step-card"><span class="step-number">03</span><h3>Start Riding</h3><p>Go to the station, pick up your reserved bike and ride.</p></div>
-</div>
-<div class="flow"><div class="flow-box green">Rider</div><span>→</span><div class="flow-box orange">Book a Bike</div><span>→</span><div class="flow-box green">Pick Up</div><span>→</span><div class="flow-box orange">Return</div></div>
-<div class="station-explainer">
-<p class="eyebrow">STATION MODEL</p>
-<h2>Book first. <span class="accent">Pick up there.</span></h2>
-<p>Ride Hub uses fixed bike stations. Select a pickup station, choose your bike and ride window, then visit that station to collect your reserved bike. Return it to an available Ride Hub station.</p>
-</div>
-<div class="how-cta"><a class="btn btn-dark" href="#booking-modal">Book a Bike</a></div>
-</section><section class="page-section contact-page route-page" data-route="contact">
-<div class="contact-wrap">
-<div class="contact-text">
-<p class="eyebrow">GET IN TOUCH</p>
-<h1>Questions about your <span class="accent">ride?</span></h1>
-<p class="section-sub">Ask about stations, bookings or future Ride Hub partnerships.</p>
-<div class="contact-details">
-<p><strong>Email</strong><br/>support@ridehub.example</p>
-<p><strong>Service</strong><br/>Campus &amp; city bike stations</p>
-</div>
-</div>
-<form action="#" class="contact-form" id="contactForm" method="post">
-<label for="name">Name</label><input id="name" name="name" placeholder="Your full name" required="" type="text"/>
-<label for="email">Email</label><input id="email" name="email" placeholder="you@rider.com" required="" type="email"/>
-<label for="message">Message</label><textarea id="message" name="message" placeholder="How can we help?" required="" rows="4"></textarea>
-<button class="btn btn-dark" type="submit">Send Message</button>
-<p class="form-msg" id="formMsg"></p>
-</form>
-</div>
-</section></main>
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-<div class="footer-wrap">
-<img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
-<p class="tagline">"Rent. Ride. Repeat."</p>
-<p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
-</div>
-</footer>
-<!-- ================= LOGIN MODAL ================= -->
-<div class="login-modal" id="login-modal">
-<div class="modal-box">
-<a aria-label="Close login" class="modal-close" href="#">×</a>
-<img alt="Ride Hub" class="modal-logo" src="ride-hub-logo.png"/>
-<h2>Welcome Back</h2>
-<p class="modal-sub">Login to book your ride</p>
-<form action="#" class="login-form" id="loginForm" method="post">
-<label for="loginEmail">Email Address</label>
-<input id="loginEmail" name="loginEmail" placeholder="you@rider.com" required="" type="email"/>
-<label for="loginPassword">Password</label>
-<input id="loginPassword" maxlength="30" name="loginPassword" placeholder="Enter your password" required="" type="password"/>
-<div class="modal-row">
-<label class="remember"><input name="remember" type="checkbox"/> Remember me</label>
-<a href="mailto:support@ridehub.example?subject=Ride%20Hub%20Password%20Help">Forgot password?</a>
-</div>
-<button class="btn btn-dark btn-full" type="submit">Login</button>
-<p class="modal-msg" id="loginMsg"></p>
-</form>
-<p class="modal-footer">Don't have an account? <a href="#booking-modal">Start as a guest</a></p>
-</div>
-</div>
-<!-- ================= BOOKING MODAL ================= -->
-<div class="booking-modal" id="booking-modal">
-<div class="booking-box">
-<a aria-label="Close booking" class="modal-close" href="#">×</a>
-<div class="booking-heading">
-<div>
-<p class="eyebrow">RIDE HUB BOOKING</p>
-<h2>Reserve your ride</h2>
-<p class="modal-sub">
-            Choose where you will pick up the bike and when you want to ride.
-          </p>
-</div>
-</div>
-<!--
-        This is intentionally a normal HTML form.
-        It demonstrates the form/input/select/radio/date/time concepts
-        from the lecture notes without adding a backend yet.
-      -->
-<form action="#" class="booking-form" id="bookingForm" method="post">
-<div class="form-section-title">1. Choose your station</div>
-<div class="form-row-two">
-<div class="field">
-<label for="pickupStation">Pickup Station</label>
-<select id="pickupStation" name="pickupStation" required="">
-<option value="">Select a station</option>
-<option value="MG Road Hub">MG Road Hub — 12 bikes</option>
-<option value="University Gate">University Gate — 15 bikes</option>
-<option value="City Centre">City Centre — 8 bikes</option>
-<option value="Railway Station">Railway Station — 6 bikes</option>
-<option value="Green Park">Green Park — 10 bikes</option>
-</select>
-</div>
-<div class="field">
-<label for="returnStation">Return Station</label>
-<select id="returnStation" name="returnStation" required="">
-<option value="">Select a return station</option>
-<option value="MG Road Hub">MG Road Hub</option>
-<option value="University Gate">University Gate</option>
-<option value="City Centre">City Centre</option>
-<option value="Railway Station">Railway Station</option>
-<option value="Green Park">Green Park</option>
-</select>
-</div>
-</div>
-<div class="location-note">
-<strong>📍 Station model:</strong>
-          Ride Hub uses fixed bike stations. You book first, then visit the
-          selected station to pick up your reserved bike.
-        </div>
-<div class="form-section-title">2. Choose your bike</div>
-<div class="bike-options">
-<label class="bike-option">
-<input checked="" name="bikeType" type="radio" value="City Bike"/>
-<span>
-<strong>City Bike</strong>
-<small>₹40 / hour · Everyday rides</small>
-</span>
-</label>
-<label class="bike-option">
-<input name="bikeType" type="radio" value="Mountain Bike"/>
-<span>
-<strong>Mountain Bike</strong>
-<small>₹60 / hour · Rougher routes</small>
-</span>
-</label>
-<label class="bike-option">
-<input name="bikeType" type="radio" value="Electric Bike"/>
-<span>
-<strong>Electric Bike</strong>
-<small>₹90 / hour · Extra assistance</small>
-</span>
-</label>
-</div>
-<div class="form-section-title">3. Pick your ride window</div>
-<div class="form-row-two">
-<div class="field">
-<label for="rideDate">Date</label>
-<input id="rideDate" name="rideDate" required="" type="date"/>
-</div>
-<div class="field">
-<label for="rideTime">Pickup Time</label>
-<input id="rideTime" max="22:00" min="06:00" name="rideTime" required="" type="time"/>
-</div>
-</div>
-<div class="form-row-two">
-<div class="field">
-<label for="rideDuration">Duration</label>
-<select id="rideDuration" name="rideDuration" required="">
-<option value="1">1 hour</option>
-<option value="2">2 hours</option>
-<option value="3">3 hours</option>
-<option value="4">4 hours</option>
-<option value="6">6 hours</option>
-<option value="8">8 hours</option>
-</select>
-</div>
-<div class="field">
-<label for="riderName">Rider Name</label>
-<input id="riderName" maxlength="40" name="riderName" placeholder="Your name" required="" type="text"/>
-</div>
-</div>
-<div class="form-section-title">4. Payment method</div>
-<div class="payment-options">
-<label class="payment-option">
-<input checked="" name="payment" type="radio" value="UPI"/>
-<span><strong>UPI</strong><small>Pay using UPI</small></span>
-</label>
-<label class="payment-option">
-<input name="payment" type="radio" value="Card"/>
-<span><strong>Card</strong><small>Debit / Credit card</small></span>
-</label>
-<label class="payment-option">
-<input name="payment" type="radio" value="Pay at Station"/>
-<span><strong>At Station</strong><small>Pay when you pick up</small></span>
-</label>
-</div>
-<div class="booking-bottom">
-<div class="price-box">
-<span>Estimated total</span>
-<strong id="estimatedTotal">₹40</strong>
-<small id="priceNote">1 hour · City Bike</small>
-</div>
-<button class="btn btn-dark" type="submit">Confirm Booking</button>
-</div>
-<p class="booking-form-msg" id="bookingFormMsg"></p>
-</form>
-<div class="booking-demo-note">
-<strong>Prototype note:</strong>
-        payment is only a selectable method for now. No real money is charged.
-        A future JavaScript/backend version can connect UPI, cards and actual
-        booking records.
+
+<!-- ================= REACT STARTS HERE =================
+     React will build the whole homepage inside this empty div. -->
+<div id="root"></div>
+
+<script>
+  // Hide the loading screen 1.8 seconds after the page loads
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      var loadingScreen = document.getElementById("loadingScreen");
+      loadingScreen.style.opacity = "0";
+      loadingScreen.style.visibility = "hidden";
+    }, 1800);
+  });
+</script>
+
+<!-- 1. React library (creates components and handles state)
+     2. ReactDOM (puts React components on the web page)
+     3. Babel (lets the browser understand JSX, the HTML-like code below)
+     Needs internet, because these three files come from a CDN. -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+
+<!-- Our own login / sign up functions (getCurrentUser, logOut ...) -->
+<script src="auth.js"></script>
+
+<script type="text/babel">
+/* =========================================================
+   RIDE HUB HOMEPAGE — BUILT WITH REACT
+
+   Ideas used in this file:
+   1. Component  -> a JavaScript function that returns HTML (JSX)
+   2. Props      -> data passed from a parent component to a child
+   3. State      -> data that changes; React redraws the page when it changes
+   4. map()      -> turns an array of data into a list of elements
+   ========================================================= */
+
+// useState and useEffect are two tools that come with React
+const { useState, useEffect } = React;
+
+
+/* =========================================================
+   DATA — plain JavaScript arrays of objects
+   ========================================================= */
+const bikes = [
+  { name: "City Bike", price: 40, icon: "🚲", text: "Light and comfortable. Best for everyday rides on campus and in the city." },
+  { name: "Mountain Bike", price: 60, icon: "⛰️", text: "Strong tyres and gears for rougher routes and longer trips." },
+  { name: "Electric Bike", price: 90, icon: "⚡", text: "Motor assistance so you can ride further with less effort." }
+];
+
+const stations = [
+  { name: "MG Road Hub", bikes: 12 },
+  { name: "University Gate", bikes: 15 },
+  { name: "City Centre", bikes: 8 },
+  { name: "Railway Station", bikes: 6 },
+  { name: "Green Park", bikes: 10 }
+];
+
+const stats = [
+  { number: "1,000+", label: "Bikes" },
+  { number: "25+", label: "Stations" },
+  { number: "5,000+", label: "Rides" },
+  { number: "98%", label: "Uptime" }
+];
+
+const steps = [
+  { number: "01", title: "Sign Up / Login", text: "Create your free account or login to Ride Hub." },
+  { number: "02", title: "Book a Bike", text: "Pick a station, a bike and your ride time." },
+  { number: "03", title: "Start Riding", text: "Visit the station, collect your bike and ride." }
+];
+
+
+/* =========================================================
+   SMALL HELPER FUNCTIONS (normal JavaScript)
+   ========================================================= */
+
+// Today's date as "YYYY-MM-DD" (used so nobody can book a past date)
+function getToday() {
+  const d = new Date();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return d.getFullYear() + "-" + month + "-" + day;
+}
+
+// All bookings are saved in localStorage under one key
+function getAllBookings() {
+  const saved = localStorage.getItem("rideHubBookings");
+  return saved === null ? [] : JSON.parse(saved);
+}
+
+// Only the bookings that belong to this email
+function getBookingsOf(email) {
+  return getAllBookings().filter(function (booking) {
+    return booking.email === email;
+  });
+}
+
+
+/* =========================================================
+   COMPONENT 1: NAVBAR
+   Props: user, isDark, onToggleTheme, onLogout
+   State: menuOpen (is the mobile menu open?)
+   ========================================================= */
+function Navbar(props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header className="site-header">
+      <div className="nav-wrap">
+        <a className="brand" href="index.html">
+          <img alt="Ride Hub" className="brand-logo" src="ride-hub-logo.png" />
+        </a>
+
+        <nav>
+          <ul className={menuOpen ? "nav-links open" : "nav-links"}>
+            <li><a className="active" href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <li className="theme-item">
+              <button className="theme-toggle" type="button" onClick={props.onToggleTheme}>
+                <span className="theme-icon">{props.isDark ? "☀" : "☾"}</span>
+                <span>{props.isDark ? "Light Mode" : "Dark Mode"}</span>
+              </button>
+            </li>
+
+            {/* Show different buttons depending on whether someone is logged in */}
+            <li className="nav-login">
+              {props.user ? (
+                <>
+                  <span className="nav-user">Hi, {props.user.name.split(" ")[0]}</span>
+                  <button className="btn btn-dark btn-small" type="button" onClick={props.onLogout}>
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a className="btn btn-outline btn-small" href="login.html">Login</a>
+                  <a className="btn btn-dark btn-small" href="signup.html">Sign Up</a>
+                </>
+              )}
+            </li>
+          </ul>
+        </nav>
+
+        <button
+          aria-label="Open navigation menu"
+          className="hamburger"
+          type="button"
+          onClick={function () { setMenuOpen(!menuOpen); }}
+        >
+          <span></span><span></span><span></span>
+        </button>
       </div>
-</div>
-</div>
-<script src="script.js"></script>
+    </header>
+  );
+}
+
+
+/* =========================================================
+   COMPONENT 2: HERO (big banner at the top)
+   Props: user
+   ========================================================= */
+function Hero(props) {
+  const station = stations[0]; // the "nearby" station shown in the card
+
+  // The greeting changes depending on who is logged in
+  let greeting = "Sign up for free to start booking bikes.";
+  if (props.user) {
+    greeting = "Welcome back, " + props.user.name.split(" ")[0] + "! Choose a station and reserve your bike.";
+  }
+
+  return (
+    <section className="hero">
+      <div className="hero-wrap">
+        <div className="hero-text">
+          <p className="eyebrow">BIKE RENTAL PORTAL</p>
+          <h1>Ride Anywhere.<br /><span className="accent">Anytime.</span></h1>
+          <p>Book a bike near you in seconds and ride across campus or the city hassle-free — no queues, no paperwork.</p>
+
+          <div className="hero-buttons">
+            <a className="btn btn-dark" href="#booking">Book a Bike</a>
+            <a className="btn btn-outline" href="about.html">Learn More</a>
+          </div>
+
+          <p className="booking-msg">{greeting}</p>
+        </div>
+
+        <div className="hero-card">
+          <div className="hero-card-top">
+            <div>
+              <p className="hero-card-label">NEARBY STATION</p>
+              <h3>{station.name}</h3>
+            </div>
+            <span className="station-status">OPEN</span>
+          </div>
+          <p className="location-line">● {station.name} · Main Gate</p>
+          <div className="bike-count">
+            <strong>{station.bikes}</strong>
+            <span>bikes available</span>
+          </div>
+          <div className="track">
+            <div className="track-fill" style={{ width: (station.bikes / 20) * 100 + "%" }}></div>
+          </div>
+          <p className="hero-card-sub">Pick up here after booking</p>
+          <p className="hero-card-rating">★★★★☆  4.3 / 5</p>
+          <a className="station-link" href="#booking">View stations →</a>
+        </div>
+      </div>
+
+      <div className="stats-strip">
+        {stats.map(function (item) {
+          return (
+            <div className="stat" key={item.label}>
+              <span className="stat-number">{item.number}</span>
+              <span className="stat-label">{item.label}</span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+/* =========================================================
+   COMPONENT 3: FLEET (the three bike cards)
+   Props: selectedBike, onSelectBike
+   The parent (App) owns the selected bike, so this card list and
+   the booking form always stay in sync. This is called
+   "lifting state up".
+   ========================================================= */
+function Fleet(props) {
+  return (
+    <section className="features" id="fleet">
+      <p className="eyebrow">OUR FLEET</p>
+      <h2>Pick a bike that fits <span className="accent">your ride.</span></h2>
+      <p className="section-sub">Click "Select" and the booking form below fills in your choice.</p>
+
+      <div className="feature-grid">
+        {bikes.map(function (bike) {
+          const isSelected = props.selectedBike === bike.name;
+
+          return (
+            <div
+              className={isSelected ? "feature-card bike-card selected" : "feature-card bike-card"}
+              key={bike.name}
+            >
+              <div className="feature-icon">{bike.icon}</div>
+              <h3>{bike.name}</h3>
+              <p>{bike.text}</p>
+              <p className="bike-price">₹{bike.price} <small>/ hour</small></p>
+
+              <a
+                className={isSelected ? "btn btn-dark btn-small" : "btn btn-outline btn-small"}
+                href="#booking"
+                onClick={function () { props.onSelectBike(bike.name); }}
+              >
+                {isSelected ? "Selected ✓" : "Select"}
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+/* =========================================================
+   COMPONENT 4: BOOKING FORM
+   Props: user, bikeType, onChangeBike
+   State: form (all the input values), message, bookings
+   Every input is "controlled": its value comes from state,
+   and typing updates the state.
+   ========================================================= */
+function BookingForm(props) {
+  const emptyForm = {
+    pickup: "",
+    dropoff: "",
+    date: "",
+    time: "",
+    duration: "1",
+    payment: "UPI"
+  };
+
+  const [form, setForm] = useState(emptyForm);
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [bookings, setBookings] = useState(props.user ? getBookingsOf(props.user.email) : []);
+
+  // When the user logs out (or in), show the matching bookings
+  useEffect(function () {
+    setBookings(props.user ? getBookingsOf(props.user.email) : []);
+  }, [props.user]);
+
+  // One function handles every input.
+  // event.target.name tells us WHICH input changed, and
+  // event.target.value tells us the NEW value.
+  function handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    setForm({ ...form, [name]: value }); // copy old form, replace just one field
+  }
+
+  // Price = hourly rate of the chosen bike × number of hours
+  const chosenBike = bikes.find(function (bike) {
+    return bike.name === props.bikeType;
+  });
+  const total = chosenBike.price * Number(form.duration);
+  const hoursText = form.duration === "1" ? "1 hour" : form.duration + " hours";
+
+  function handleSubmit(event) {
+    event.preventDefault(); // stop the page from reloading
+
+    // Only logged-in users can confirm a booking
+    if (!props.user) {
+      setMessage({ type: "error", text: "Please login or sign up first to confirm your booking." });
+      return;
+    }
+
+    const newBooking = {
+      id: Date.now(), // a unique number made from the current time
+      email: props.user.email,
+      rider: props.user.name,
+      bike: props.bikeType,
+      pickup: form.pickup,
+      dropoff: form.dropoff,
+      date: form.date,
+      time: form.time,
+      duration: form.duration,
+      payment: form.payment,
+      total: total
+    };
+
+    // Save to localStorage (put the new booking at the start of the list)
+    const all = getAllBookings();
+    all.unshift(newBooking);
+    localStorage.setItem("rideHubBookings", JSON.stringify(all));
+
+    setBookings(getBookingsOf(props.user.email));
+    setForm(emptyForm);
+    setMessage({ type: "success", text: "Booking confirmed! Visit " + newBooking.pickup + " to pick up your bike. No payment was charged (prototype)." });
+  }
+
+  // Remove one booking from localStorage
+  function cancelBooking(id) {
+    const remaining = getAllBookings().filter(function (booking) {
+      return booking.id !== id;
+    });
+    localStorage.setItem("rideHubBookings", JSON.stringify(remaining));
+    setBookings(getBookingsOf(props.user.email));
+  }
+
+  return (
+    <section className="booking-section" id="booking">
+      <div className="booking-card">
+        <p className="eyebrow">RIDE HUB BOOKING</p>
+        <h2>Reserve your ride</h2>
+
+        {/* Tell visitors they need an account */}
+        {!props.user && (
+          <p className="login-note">
+            You are not logged in. <a href="login.html">Login</a> or <a href="signup.html">Sign Up</a> to confirm a booking.
+          </p>
+        )}
+
+        <form className="booking-form" onSubmit={handleSubmit}>
+          <div className="form-section-title">1. Choose your station</div>
+          <div className="form-row-two">
+            <div className="field">
+              <label htmlFor="pickup">Pickup Station</label>
+              <select id="pickup" name="pickup" required value={form.pickup} onChange={handleChange}>
+                <option value="">Select a station</option>
+                {stations.map(function (s) {
+                  return <option key={s.name} value={s.name}>{s.name} — {s.bikes} bikes</option>;
+                })}
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor="dropoff">Return Station</label>
+              <select id="dropoff" name="dropoff" required value={form.dropoff} onChange={handleChange}>
+                <option value="">Select a return station</option>
+                {stations.map(function (s) {
+                  return <option key={s.name} value={s.name}>{s.name}</option>;
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className="form-section-title">2. Choose your bike</div>
+          <div className="bike-options">
+            {bikes.map(function (bike) {
+              return (
+                <label className="bike-option" key={bike.name}>
+                  <input
+                    type="radio"
+                    name="bikeType"
+                    checked={props.bikeType === bike.name}
+                    onChange={function () { props.onChangeBike(bike.name); }}
+                  />
+                  <span>
+                    <strong>{bike.name}</strong>
+                    <small>₹{bike.price} / hour</small>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+
+          <div className="form-section-title">3. Pick your ride window</div>
+          <div className="form-row-two">
+            <div className="field">
+              <label htmlFor="date">Date</label>
+              <input id="date" name="date" type="date" min={getToday()} required value={form.date} onChange={handleChange} />
+            </div>
+            <div className="field">
+              <label htmlFor="time">Pickup Time</label>
+              <input id="time" name="time" type="time" min="06:00" max="22:00" required value={form.time} onChange={handleChange} />
+            </div>
+          </div>
+          <div className="form-row-two">
+            <div className="field">
+              <label htmlFor="duration">Duration</label>
+              <select id="duration" name="duration" value={form.duration} onChange={handleChange}>
+                <option value="1">1 hour</option>
+                <option value="2">2 hours</option>
+                <option value="3">3 hours</option>
+                <option value="4">4 hours</option>
+                <option value="6">6 hours</option>
+                <option value="8">8 hours</option>
+              </select>
+            </div>
+            <div className="field">
+              <label htmlFor="rider">Rider Name</label>
+              <input id="rider" type="text" readOnly value={props.user ? props.user.name : ""} placeholder="Login to see your name" />
+            </div>
+          </div>
+
+          <div className="form-section-title">4. Payment method</div>
+          <div className="payment-options">
+            {["UPI", "Card", "Pay at Station"].map(function (method) {
+              return (
+                <label className="payment-option" key={method}>
+                  <input type="radio" name="payment" value={method} checked={form.payment === method} onChange={handleChange} />
+                  <span><strong>{method}</strong></span>
+                </label>
+              );
+            })}
+          </div>
+
+          <div className="booking-bottom">
+            <div className="price-box">
+              <span>Estimated total</span>
+              <strong>₹{total}</strong>
+              <small>{hoursText} · {props.bikeType}</small>
+            </div>
+            <button className="btn btn-dark" type="submit">Confirm Booking</button>
+          </div>
+
+          <p className={"auth-msg " + message.type}>{message.text}</p>
+        </form>
+
+        {/* List of this user's bookings (only when logged in) */}
+        {props.user && (
+          <div className="my-bookings">
+            <h3>Your bookings</h3>
+            {bookings.length === 0 ? (
+              <p className="empty-note">You have no bookings yet.</p>
+            ) : (
+              <ul>
+                {bookings.map(function (b) {
+                  return (
+                    <li key={b.id}>
+                      <div>
+                        <strong>{b.bike}</strong> · {b.duration} hr · ₹{b.total}
+                        <small>{b.pickup} → {b.dropoff} · {b.date} at {b.time}</small>
+                      </div>
+                      <button className="btn btn-outline btn-small" type="button" onClick={function () { cancelBooking(b.id); }}>
+                        Cancel
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+/* =========================================================
+   COMPONENT 5: HOW IT WORKS (3 step cards)
+   ========================================================= */
+function Steps() {
+  return (
+    <section className="how-it-works">
+      <p className="eyebrow">SIMPLE, FOCUSED UI</p>
+      <h2>Three steps to <span className="accent">your next ride.</span></h2>
+
+      <div className="steps-grid">
+        {steps.map(function (step) {
+          return (
+            <div className="step-card" key={step.number}>
+              <span className="step-number">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+/* =========================================================
+   COMPONENT 6: FOOTER
+   ========================================================= */
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="footer-wrap">
+        <img alt="Ride Hub Bike Rental Portal" className="footer-logo" src="ride-hub-logo.png" />
+        <p className="tagline">"Rent. Ride. Repeat."</p>
+        <p className="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+      </div>
+    </footer>
+  );
+}
+
+
+/* =========================================================
+   MAIN COMPONENT: App
+   It owns the data that several components need:
+   user, theme and the selected bike.
+   ========================================================= */
+function App() {
+  // getCurrentUser() comes from auth.js (reads localStorage)
+  const [user, setUser] = useState(getCurrentUser());
+  const [isDark, setIsDark] = useState(localStorage.getItem("rideHubTheme") === "dark");
+  const [selectedBike, setSelectedBike] = useState("City Bike");
+
+  // Runs after every change of isDark: update the page theme and remember it
+  useEffect(function () {
+    document.body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("rideHubTheme", isDark ? "dark" : "light");
+  }, [isDark]);
+
+  function handleLogout() {
+    logOut();      // from auth.js: removes the logged-in user
+    setUser(null); // tell React, so the page redraws
+  }
+
+  return (
+    <>
+      <Navbar
+        user={user}
+        isDark={isDark}
+        onToggleTheme={function () { setIsDark(!isDark); }}
+        onLogout={handleLogout}
+      />
+
+      <main>
+        <Hero user={user} />
+        <Fleet selectedBike={selectedBike} onSelectBike={setSelectedBike} />
+        <BookingForm user={user} bikeType={selectedBike} onChangeBike={setSelectedBike} />
+        <Steps />
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+
+// Draw the App component inside <div id="root">
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+
 </body>
 </html>

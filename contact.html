@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact — Ride Hub</title>
+<link href="style.css" rel="stylesheet"/>
+<script>
+  // Apply the saved dark theme BEFORE the page paints (avoids a white flash)
+  if (localStorage.getItem("rideHubTheme") === "dark") {
+    document.documentElement.classList.add("theme-preload-dark");
+  }
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a class="active" href="contact.html">Contact</a></li>
+        <li class="theme-item">
+          <button aria-label="Switch theme" class="theme-toggle" id="themeToggle" type="button">
+            <span class="theme-icon" id="themeIcon">☾</span>
+            <span id="themeText">Dark Mode</span>
+          </button>
+        </li>
+        <!-- auth.js fills this with Login/Sign Up or Hi, Name/Logout -->
+        <li class="nav-login" id="authArea"></li>
+      </ul>
+    </nav>
+    <button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="page-section contact-page">
+<div class="contact-wrap">
+<div class="contact-text">
+<p class="eyebrow">GET IN TOUCH</p>
+<h1>Questions about your <span class="accent">ride?</span></h1>
+<p class="section-sub">Ask about stations, bookings or future Ride Hub partnerships.</p>
+<div class="contact-details">
+<p><strong>Email</strong><br/>support@ridehub.example</p>
+<p><strong>Service</strong><br/>Campus &amp; city bike stations</p>
+</div>
+</div>
+<form action="#" class="contact-form" id="contactForm" method="post">
+<label for="name">Name</label><input id="name" name="name" placeholder="Your full name" required="" type="text"/>
+<label for="email">Email</label><input id="email" name="email" placeholder="you@rider.com" required="" type="email"/>
+<label for="message">Message</label><textarea id="message" name="message" placeholder="How can we help?" required="" rows="4"></textarea>
+<button class="btn btn-dark" type="submit">Send Message</button>
+<p class="form-msg" id="formMsg"></p>
+</form>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
+    <p class="tagline">"Rent. Ride. Repeat."</p>
+    <p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

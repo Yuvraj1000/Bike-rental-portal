@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How It Works — Ride Hub</title>
+<link href="style.css" rel="stylesheet"/>
+<script>
+  // Apply the saved dark theme BEFORE the page paints (avoids a white flash)
+  if (localStorage.getItem("rideHubTheme") === "dark") {
+    document.documentElement.classList.add("theme-preload-dark");
+  }
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a class="active" href="how-it-works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="theme-item">
+          <button aria-label="Switch theme" class="theme-toggle" id="themeToggle" type="button">
+            <span class="theme-icon" id="themeIcon">☾</span>
+            <span id="themeText">Dark Mode</span>
+          </button>
+        </li>
+        <!-- auth.js fills this with Login/Sign Up or Hi, Name/Logout -->
+        <li class="nav-login" id="authArea"></li>
+      </ul>
+    </nav>
+    <button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="page-section how-page">
+<p class="eyebrow">SIMPLE, FOCUSED UI</p>
+<h1>How It <span class="accent">Works</span></h1>
+<p class="section-sub">Three simple steps between you and your next ride.</p>
+<div class="steps-grid">
+<div class="step-card"><span class="step-number">01</span><h3>Login</h3><p>Enter Ride Hub and choose your ride.</p></div>
+<div class="step-card"><span class="step-number">02</span><h3>Book a Bike</h3><p>Pick a station, bike and ride window.</p></div>
+<div class="step-card"><span class="step-number">03</span><h3>Start Riding</h3><p>Go to the station, pick up your reserved bike and ride.</p></div>
+</div>
+<div class="flow"><div class="flow-box green">Rider</div><span>→</span><div class="flow-box orange">Book a Bike</div><span>→</span><div class="flow-box green">Pick Up</div><span>→</span><div class="flow-box orange">Return</div></div>
+<div class="station-explainer">
+<p class="eyebrow">STATION MODEL</p>
+<h2>Book first. <span class="accent">Pick up there.</span></h2>
+<p>Ride Hub uses fixed bike stations. Select a pickup station, choose your bike and ride window, then visit that station to collect your reserved bike. Return it to an available Ride Hub station.</p>
+</div>
+<div class="how-cta"><a class="btn btn-dark" href="index.html#booking">Book a Bike</a></div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
+    <p class="tagline">"Rent. Ride. Repeat."</p>
+    <p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

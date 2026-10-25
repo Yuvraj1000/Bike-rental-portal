@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About — Ride Hub</title>
+<link href="style.css" rel="stylesheet"/>
+<script>
+  // Apply the saved dark theme BEFORE the page paints (avoids a white flash)
+  if (localStorage.getItem("rideHubTheme") === "dark") {
+    document.documentElement.classList.add("theme-preload-dark");
+  }
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img alt="Ride Hub" class="brand-logo" src="ride-hub-logo.png"/>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="about.html">About</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="theme-item">
+          <button aria-label="Switch theme" class="theme-toggle" id="themeToggle" type="button">
+            <span class="theme-icon" id="themeIcon">☾</span>
+            <span id="themeText">Dark Mode</span>
+          </button>
+        </li>
+        <!-- auth.js fills this with Login/Sign Up or Hi, Name/Logout -->
+        <li class="nav-login" id="authArea"></li>
+      </ul>
+    </nav>
+    <button aria-label="Open navigation menu" class="hamburger" id="menuBtn" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<section class="page-section about-page">
+<p class="eyebrow">WHY RIDE HUB</p>
+<h1>Introduction &amp; Idea <span class="accent">Overview</span></h1>
+<div class="about-layout">
+<div>
+<p class="section-lead">Ride Hub is a simple Bike Rental Portal that gives riders an easy, on-demand way to book and return bikes across campus and the city.</p>
+<div class="info-block">
+<p class="eyebrow">THE PROBLEM</p>
+<ul class="plain-list">
+<li>Traditional bike rentals mean queues, paperwork &amp; delays</li>
+<li>Riders need a fast, reliable way to find and book bikes</li>
+<li>No single platform to track bikes, stations &amp; ride history</li>
+</ul>
+</div>
+<div class="info-block">
+<p class="eyebrow">OUR IDEA</p>
+<ul class="plain-list">
+<li>A centralized, digital bike rental platform</li>
+<li>Simple, rider-friendly booking &amp; return flow</li>
+<li>Real-time visibility into bike &amp; station availability</li>
+<li>Promotes affordable, eco-friendly commuting</li>
+</ul>
+</div>
+</div>
+<div class="about-stats-card">
+<div class="mini-stat"><strong>1,000+</strong><span>Riders</span></div>
+<div class="mini-stat"><strong>25+</strong><span>Stations</span></div>
+<div class="mini-stat"><strong>5,000+</strong><span>Rides</span></div>
+<div class="mini-stat"><strong>95%</strong><span>Response Rate</span></div>
+<p>Live rider engagement stats</p>
+</div>
+</div>
+<section class="features about-features">
+<p class="eyebrow">THE ACTUAL INTERFACE</p>
+<h2>Every ride helps us <span class="accent">move.</span></h2>
+<p class="section-sub">Ride Hub gives riders and station operators a clear view of bikes, stations and bookings.</p>
+<div class="feature-grid">
+<div class="feature-card"><div class="feature-icon">01</div><h3>Quick Booking</h3><p>Reserve a bike in seconds from any nearby station.</p></div>
+<div class="feature-card"><div class="feature-icon">02</div><h3>Live Tracking</h3><p>See station locations and the number of bikes available.</p></div>
+<div class="feature-card"><div class="feature-icon">03</div><h3>Easy Returns</h3><p>Return your bike to an available Ride Hub station.</p></div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-wrap">
+    <img alt="Ride Hub Bike Rental Portal" class="footer-logo" src="ride-hub-logo.png"/>
+    <p class="tagline">"Rent. Ride. Repeat."</p>
+    <p class="footer-meta">G12-PID-23  •  Team Triple Joint  •  Bike Rental System</p>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
